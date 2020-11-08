@@ -139,7 +139,7 @@ def load_flights(year, month, track_root=TRACK_ROOT):
     flights = flights[~flights.icao24.isnull()]
     
     # Get all track csv dir
-    flights["csv"] = flights.parallel_apply(lambda x: find_track_csv(x, track_root), axis=1)
+    flights["csv"] = flights.parallel_apply(find_track_csv, axis=1)
     flights.reset_index(drop=True, inplace=True)
     return flights
 
